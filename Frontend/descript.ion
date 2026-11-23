@@ -1,0 +1,2 @@
+checkDef.cmd -- This Script Checks a Microsoft Windows Version of an OS and Checks if the Windows Defender only Installed in the OS, other Antivirus Installed or None Antivirus Installed.\n\nThis Script Uses Programs WMIC.exe, bitsadmin.exe\nÂ
+checkWinOS.cmd -- This Script Checks a Microsoft Windows Version of an OS and Checks if the Windows Defender only Installed in the OS, other Antivirus Installed or None Antivirus Installed.\n\nThis Script Uses Programs WMIC.exe, bitsadmin.exe\nÂ

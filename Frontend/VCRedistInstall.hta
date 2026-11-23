@@ -1,0 +1,941 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <!-- Main View properties -->
+
+    <meta content="text/html;charset=utf-8" http-equiv="content-type">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport">
+
+    <!-- Description properties -->
+    <title>VCRedist</title>
+    <meta content="HTA файл для проверки и установки программы MSVC Redistributable Bundle 2015 & AIO" name="Description">
+    <meta content="NIT,hta,VCRedist" name="Keywords"/>
+
+    <!-- Some other properties -->
+    <meta content="Noindex,NOFOLLOW" name="robots"/>
+    <meta content="New Internet Technologies Inc." name="author">
+    <meta content="unsafe-URL" name="referrer">
+
+    <!-- Other properties -->
+
+    <style type="text/css">
+        body {
+            font-family: "Arial", Helvetica, sans-serif;
+            color: #4b4b4b;
+            background-color: #f3f3f3;
+        }
+
+        p {
+            font-family: "Times New Roman", Times, serif;
+            font-size: medium;
+        }
+
+        ol li, ul li {
+            font-family: "Times New Roman", Times, serif;
+            font-size: medium;
+        }
+
+        code {
+            color: #cc3300;
+            font-size: medium;
+        }
+
+        .parent {
+            width: 100%;
+            padding: 30px;
+        }
+
+        .text {
+            width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+
+
+        div.page {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+            position: absolute;
+            left: 0;
+            right: 0;
+        }
+
+        div.container {
+            padding: 0 10px;
+            text-align: left;
+        }
+
+        .header {
+            padding: 20px 20px;
+            text-align: center;
+            background-color: #d8d8d8;
+        }
+
+        a {
+            color: #CC0000;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #FF3300;
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: "Arial", Helvetica, sans-serif;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .content {
+            max-width: 1024px;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 0px 20px;
+            text-align: justify;
+        }
+
+        .section h1 {
+            text-align: center;
+        }
+
+        .section h2 {
+            text-align: center;
+        }
+
+        .section h3 {
+            text-align: center;
+        }
+
+        p.pict {
+            font-size: 80%;
+            padding: 0px 20px;
+            text-align: center;
+        }
+
+        .footer p {
+            text-align: center;
+        }
+		input[type=button] {
+			padding: 2px 2px;
+			text-align: center;
+            width:  100px;
+		}
+    </style>
+
+    <hta:application
+            ApplicationName="VCRedist"
+            Caption="yes"
+            Scroll="auto"
+            Selection="No"
+            SingleInstance="yes"
+            SysMenu="yes"
+            Version="1.0.0.0"
+            WindowState="normal"
+            border="thin"
+            id="NITHTAVCRedist"
+    />
+</head>
+<body>
+
+<div class="page">
+    <div class="header">
+        <h1>VCRedist | Установка</h1>
+    </div>
+    <div class="container">
+        <div class="content">
+            <p><a href="http://nit.netip6.ru/">На страницу проекта</a></p>
+
+            <p>Пакет библиотек Microsoft MSVC Redist Bundle необходим для запуска приложений, созданных при помощи Microsoft Visual C++ 2015+. Без этого пакета приложения не будут запускаться в Windows. Этот пакет предустановлен в современныхверсиях Microsoft Windows 11, но для других систем его нужно установить.</p>
+            <p>Предлагается установка AIO версии пакета с сайта New Internet Technologies, Inc . Пакет объёмный, поэому перед установкой проверьте наличие установленной версии. По-умолчанию файлы загружаются в папку «Загрузки» текущего пользователя Windows, откуда они запускаются двойным щелчком. Внимательно смотрите на разрядность установщика! После установки перезагрузите компьютер.</p>
+
+            <ul>
+                <li><input id="btn001" type="button" value="Проверка" width="100px" onClick="btn001_click()" />&nbsp;&nbsp;—&nbsp;&nbsp;Проверка установки (внешний скрипт)</li>
+                <!-- <li><input id="btn002" type="button" value="Microsoft" width="100px" onClick="btn002_click()" />&nbsp;&nbsp;—&nbsp;&nbsp;Сайт Microsoft c последней версией</li>-->
+                <li><input id="btn003" type="button" value="NIT AIO" width="100px" onClick="btn003_click()" />&nbsp;&nbsp;—&nbsp;&nbsp;Сайт NIT с версией AIO</li>
+            </ul>
+
+            <p><a href="http://nit.netip6.ru/">На страницу проекта</a></p>
+
+            <p>&nbsp;</p>
+            <p>
+            <!--    <input id="btn03" onClick="btn03_click()" type="button" value="Кнопка 03" width="100px" /> -->
+                <input id="btn01" onClick="btn01_click()" type="button" value="Reboot" width="100px" />
+                <input id="btn02" onClick="btn02_click()" type="button" value="Cancel" width="100px" />
+            </p>
+            <p>&nbsp;</p>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    /* *********************************************************
+    '
+    ' getDownloadsDirectory()
+    ' This Function Returns the Path for Downloads Directory
+    '
+    ' PARAMETERS:   NONE
+    ' RETURNS:      Path For Downloads Directory if Success
+    '       "" if General Sysytem Error
+    '
+    * *********************************************************/
+    function getDownloadsDirectory() {
+        var fso, wsh, cur_dir;
+        // Define Regisry
+        var SHCU_NODE = "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders\\";
+        var FO_Downloads = "{374DE290-123F-4565-9164-39C4925E467B}";
+        var FO_Personal = "Personal"; //My Documents
+        var SHCU_Downloads = SHCU_NODE + FO_Downloads;
+        var SHCU_Personal = SHCU_NODE + FO_Personal; //My Documents
+        // Define ActiveX Objects
+        fso = new ActiveXObject("Scripting.FileSystemObject");
+        wsh = new ActiveXObject("WScript.Shell");
+        // Define Current Directory
+        cur_dir = wsh.RegRead(SHCU_Downloads);
+        // Run Algorythm
+        var envVariable;
+        envVariable = cur_dir;
+        if (!fso.FolderExists(envVariable)) {
+            envVariable = wsh.RegRead(SHCU_Personal);
+            if (!fso.FolderExists(envVariable)) {
+                // statement
+                envVariable = getTempEnviron();
+            }
+        }
+        return envVariable;
+    }
+
+/* *****************************************************************************
+'
+' getScriptDir()
+' This Function Returns the Path for this Script
+'
+' PARAMETERS:   NONE
+' RETURNS:      Path for for This Script or emty string if error
+'
+' *****************************************************************************/
+function getScriptDir() {
+	var fso, scriptDir;
+	fso = new ActiveXObject("Scripting.FileSystemObject");
+    var scriptPath = document.location.href;
+    var scriptPath = scriptPath.replace("file:///", "");
+    var scriptPath = scriptPath.replace(/\//g, "\\");
+    // alert(scriptPath);
+	scriptDir = fso.GetParentFolderName(scriptPath);
+	if( fso.FolderExists(scriptDir))
+		return scriptDir;
+	else
+		return "";
+}
+
+/* *****************************************************************************
+'
+' getTempEnviron()
+' This Function Returns the Path for User Variable TEMP
+'
+' PARAMETERS:   NONE
+' RETURNS:      Path for Zlovred Directory if Exists or
+'               Path for User Variable %TEMP% if Success or
+'               "C:\Windows\Temp" if API Error or
+'				"" if General Sysytem Error
+'
+' *****************************************************************************/
+function getTempEnviron() {
+	var fso, wsh, envProc, envSys;
+	var strZlFolder; // Zlovred Temprorary Folder
+	// Define ActiveX Objects
+	fso = new ActiveXObject("Scripting.FileSystemObject");
+	wsh = new ActiveXObject("WScript.Shell");
+	// Define Process Environment Variable
+	envProc = wsh.Environment("PROCESS");
+	// Define System Environment Variable
+	envSys = wsh.Environment;
+	// Define Zlovred Temprorary Folder
+	strZlFolder = "C:\\pub1\\Distrib\\Zlovred";
+	// Define and Check Environment Variables
+	var envVariable;
+	envVariable = strZlFolder;
+	if(!fso.FolderExists(envVariable)) {
+		envVariable = envProc("TEMP");
+		if(!fso.FolderExists(envVariable)) {
+			envVariable = envSys("TMP");
+			if(!fso.FolderExists(envVariable)) {
+				envVariable = "";
+			}
+		}
+	}
+	return envVariable;
+}
+
+
+    /* *********************************************************
+    '
+    ' getCurrentDirectory()
+    ' This Function Returns the Path for Current Directory
+    '
+    ' PARAMETERS:   NONE
+    ' RETURNS:      Path For Current Directory if Success
+    '       "" if General Sysytem Error
+    '
+    * *********************************************************/
+    function getCurrentDirectory() {
+        var fso, wsh, cur_dir;
+        // Define ActiveX Objects
+        fso = new ActiveXObject("Scripting.FileSystemObject");
+        wsh = new ActiveXObject("WScript.Shell");
+        // Define Current Directory
+        cur_dir = wsh.CurrentDirectory
+        // Run Algorythm
+        var envVariable;
+        envVariable = cur_dir;
+        if (!fso.FolderExists(envVariable)) {
+            envVariable = "";
+        }
+        return envVariable;
+    }
+
+    /* *********************************************************
+    '
+    ' getNITDefeatDirectory01()
+    ' This Function Returns the Path for Current Directory
+    '
+    ' PARAMETERS:   NONE
+    ' RETURNS:      Path For Current Directory if Success
+    '       "" if General Sysytem Error
+    '
+    * *********************************************************/
+    function getNITDefeatDirectory01() {
+        var fso, wsh, nit_dir1, nit_dir2, nit_dir3;
+        // Define ActiveX Objects
+        fso = new ActiveXObject("Scripting.FileSystemObject");
+        wsh = new ActiveXObject("WScript.Shell");
+        // Define Current Directory
+        nit_dir1 = "C:\\Program Files (x86)\\NIT\\Defeat\\hta";
+        nit_dir2 = "C:\\Program Files\\NIT\\Defeat\\hta";
+        // Test Directory
+        nit_dir3 = "D:\\yuden\\inetpub\\www-hidden\\file.netip4.ru\\PROGS\\NIT\\DefenderDefeat\\hta";
+        // Run Algorythm
+        var envVariable;
+        envVariable = nit_dir1;
+        if (!fso.FolderExists(envVariable)) {
+            envVariable = nit_dir2;
+            if (!fso.FolderExists(envVariable)) {
+                // statement
+                envVariable = nit_dir3;
+                if (!fso.FolderExists(envVariable)) {
+                    // statement
+                    envVariable = "";
+                }
+            }
+        }
+        return envVariable;
+    }
+
+    /**********************************************************
+     * Function getXmlHttp02
+     * This Function Registers XMLHTTP Object both at
+     * Windows Script Shell and at Web Browswers
+     * If Object can't Register it Returns Empty String
+     *
+     * PARAMETERS:  NONE
+     * RETURNS:     XMLHTTP Object if Success
+     *              Empty String if no COM Object Registred
+     * *********************************************************/
+    function getXmlHttp02() {
+        // body...
+        try {
+            // return new ActiveXObject( "MSXML2.ServerXMLHTTP.4.0"); // New Unsafe Version for WSH
+            // return new ActiveXObject( "MSXML2.ServerXMLHTTP.6.0"); // New Unsafe Version for WSH
+            return new ActiveXObject("MSXML2.XMLHTTP"); // Old Safe Version for IE
+        } catch (e) {
+            try {
+                // return new ActiveXObject( "MSXML2.ServerXMLHTTP.6.0"); // New Unsafe Version for WSH
+                return new ActiveXObject("MSXML2.ServerXMLHTTP.4.0"); // New Unsafe Version for WSH
+            } catch (ee) {
+                try {
+                    // return new ActiveXObject( "MSXML2.ServerXMLHTTP.4.0"); // New Unsafe Version for WSH
+                    return new ActiveXObject("MSXML2.ServerXMLHTTP.6.0"); // New Unsafe Version for WSH
+                    // return new ActiveXObject("MSXML2.XMLHTTP"); // Old Safe Version for IE
+                } catch (eee) {
+                    try {
+                        return new ActiveXObject("Microsoft.XMLHTTP"); // Old Version
+                    } catch (eeee) {
+                    }
+                }
+            }
+        }
+        if (typeof XMLHttpRequest != "undefined") {
+            // statement
+            return new XMLHttpRequest(); // for Web Browsers
+        } else {
+            // statement
+            return "";
+        }
+    }
+
+    /* *********************************************************
+    '
+    ' UploadFilesFromInt( strFile, strURL, strPath )
+    ' This Function Upload the File strFile from URL on HTTP/HTTPS Protocols
+    ' and Save it on Local Computer to Path strPath
+    ' Function Uses Objects "Microsoft.XMLHTTP" and "Adodb.Stream"
+    '
+    ' PARAMETERS:   strFile -- a File to be Downloaded (only name and extension)
+    '               strURL -- an URL of the web-site, from which the File
+    '               is Downloaded
+    '               strPath -- a Place in a Windows Computer (Full path without slash)
+    '               in which the File is Downloaded
+    '
+    ' RETURNS:      0 -- If File is Normally Downloaded and Created
+    '               1 -- if File in Path strPath Can't Create
+    '               2 -- if XMLHTTP or ADOStream Can't Initialize
+    '       3 -- if Emty HTTP Responce or Send Access Denied
+    '       4 -- if HTTP Response Not 200 (while is not make)
+    '
+    * *********************************************************/
+    function UploadFilesFromInt(strFile, strURL, strPath) {
+        var fso, xmlHttp, adoStream;
+        // Define FileSystemObject
+        try {
+            fso = new ActiveXObject("Scripting.FileSystemObject");
+        } catch (e) {
+            return 1;
+        }
+        // Define XMLHTTP Help Object
+        xmlHttp = getXmlHttp02();
+        if (xmlHttp === "") {
+            return 2;
+        }
+        // Define Adodb.Stream Object
+        try {
+            adoStream = new ActiveXObject("Adodb.Stream");
+        } catch (e) {
+            return 2;
+        }
+        var strFileURL;
+        var strLocal_Path;
+        var intUploadFilesFromInt;
+        var blnExistRemoteFile;
+        var cb = [];
+        // Define Full Downloaded File URL
+        strFileURL = strURL + strFile;
+        // Define Full Local Path to be Downloaded
+        strLocal_Path = strPath + "\\" + strFile;
+        // Check if Path is Exist
+        if (fso.FolderExists(strPath)) intUploadFilesFromInt = 0;
+        else intUploadFilesFromInt = 1;
+        // Downloaded File
+        // Open URL (Get Requiest synchronous)
+        try {
+            xmlHttp.Open("GET", strFileURL, false);
+        } catch (e) {
+            alert("Can't Open URL: " + strFileURL + "\nError: ");
+            return 3;
+        }
+        // Set User-Agent Header (for Safari Browser)
+        xmlHttp.SetRequestHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
+        // Define Function onreadystatechange
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState === 4) {
+                cb[0] = xmlHttp.status; // Status of Request (Integer Number)
+                cb[1] = xmlHttp.getAllResponseHeaders(); // Response Header
+                cb[2] = xmlHttp.responseText; // Response Text
+                cb[3] = xmlHttp.responseBody; // Response Body
+            }
+        };
+        // Send File from URL
+        try {
+            xmlHttp.Send();
+        } catch (e) {
+            alert("Can't make Send() Request!\nMay be Block with Antivirus?");
+            return 3;
+        }
+        if (cb[0] == 200 && intUploadFilesFromInt == 0)
+            // If Send Request is Successful
+            blnExistRemoteFile = true;
+        else {
+            blnExistRemoteFile = false;
+            intUploadFilesFromInt = 4;
+            alert("Wrong HTTP Status:" + cb[0] + "\nURL = " + strFileURL);
+            xmlHttp.Abort();
+        }
+        if (blnExistRemoteFile) {
+            // Set AdoStream Type mode and Open It
+            adoStream.Type = 1;
+            adoStream.Mode = 3;
+            adoStream.Open();
+            // Write to AdoStream Response Body of HTTP Request
+            adoStream.Write(cb[3]);
+            // Save Stream to File
+            try {
+                adoStream.SaveToFile(strLocal_Path, 2);
+            } catch (e) {
+                alert("Can't Save File Stream into File: " + strLocal_Path + "\nCheck Access Rights!");
+                intUploadFilesFromInt = 1;
+            }
+            // /Downloaded File
+            // Close Objects
+            adoStream.Close();
+            xmlHttp.Abort();
+            // Check If File Downloaded
+            if (!fso.FileExists(strLocal_Path) && intUploadFilesFromInt == 0) intUploadFilesFromInt = 1;
+            // /Check if File Downloaded
+        }
+        return intUploadFilesFromInt;
+    }
+
+    /******************************************************************************
+     '
+     ' RunDownloadedScript01( strPath, strVBS, intTimeOut )
+     ' This Function Run Hidden a strVBS File
+     ' with Command "cscript //NoLogo " & strPath & "\" & strVBS
+     '
+     ' PARAMETERS:   strPath -- The Path to strVBS
+     '               strVBS -- a VBS File with instructions
+     '               (Windows Scripts Shell)
+     '       intTimeOut -- Estimated Time for Running (ms)
+     '
+     ' RETURNS:      0 if Success
+     '       1 if Path not Found
+     '
+     ******************************************************************************/
+    function RunDownloadedScript01(strPath, strVBS, intTimeOut) {
+        var constRun_VBS, constOpt;
+        // Define Windows Scripts Options
+        constRun_VBS = "//Nologo ";
+        // Define VBS Script Options (Empty)
+        constOpt = "";
+        var strValue, shApp, fso, wsh, envProc, pathCMD;
+        // Define ActiveX Object
+        shApp = new ActiveXObject("Shell.Application");
+        fso = new ActiveXObject("Scripting.FileSystemObject");
+        wsh = new ActiveXObject("WScript.Shell");
+        envProc = wsh.Environment("PROCESS");
+        pathCMD = envProc("SystemRoot") + "\\System32";
+        // Check Paths
+        if (!fso.FileExists(pathCMD + "\\cscript.exe")) {
+            return 1
+        }
+        ;
+        if (!fso.FileExists(strPath + "\\" + strVBS)) {
+            return 1
+        }
+        ;
+        // Set Cscript Command Arguments
+        strValue = constRun_VBS + "\"" + strPath + "\\" + strVBS + "\"" + constOpt;
+        // Run cscript.exe with Normal Privileges ("") at Invisible Mode (0), with working Directory strPath
+        shApp.ShellExecute(pathCMD + "\\cscript.exe", strValue, strPath, "", 0);
+        //    setTimeout( DoNothing, intTimeOut );
+        // Stop Script on intTimeOut miliseconds for Wait if  Bitsadmin done
+        // WScript.Sleep(intTimeOut);
+        return 0;
+    }
+
+    /******************************************************************************
+     '
+     ' OpenDownloadedText( strPath, strText )
+     ' This Function Open a strText File
+     ' with Command "cmd /c start " & strPath & "\" & strVBS
+     '
+     ' PARAMETERS:   strPath -- The Path to strVBS
+     '               strText -- a Text File with instructions
+     '               (text/plain)
+     '
+     ' RETURNS:      0 if Success
+     '       1 if Path not Found
+     '
+     ******************************************************************************/
+    function OpenDownloadedText(strPath, strText) {
+        var constRun_cmd, constOpt;
+        // Define Command Shell Options
+        constRun_cmd = "/c Start ";
+        // Define VBS Script Options (Empty)
+        constOpt = "";
+        var strValue, shApp, fso, wsh, envProc, pathCMD;
+        // Define ActiveX Object
+        shApp = new ActiveXObject("Shell.Application");
+        fso = new ActiveXObject("Scripting.FileSystemObject");
+        wsh = new ActiveXObject("WScript.Shell");
+        envProc = wsh.Environment("PROCESS");
+        pathCMD = envProc("SystemRoot") + "\\System32";
+        // Check Paths
+        if (!fso.FileExists(pathCMD + "\\cmd.exe")) {
+            return 1
+        }
+        ;
+        if (!fso.FileExists(strPath + "\\" + strVBS)) {
+            return 1
+        }
+        ;
+        // Set Cscript Command Arguments
+        strValue = constRun_cmd + "\"" + strPath + "\\" + strVBS + "\"" + constOpt;
+        // Run cscript.exe with Normal Privileges ("") at Visible Mode (1), with working Directory strPath
+        shApp.ShellExecute(pathCMD + "\\cmd.exe", strValue, strPath, "", 1);
+        return 0;
+    }
+
+    /******************************************************************************
+     '
+     ' OpenDownloadedAsText( strPath, strText )
+     ' This Function Open a strText File
+     ' with Command "cmd /c start " & strPath & "\" & strVBS
+     '
+     ' PARAMETERS:   strPath -- The Path to strVBS
+     '               strText -- a Text File with instructions
+     '               (text/plain)
+     '
+     ' RETURNS:      0 if Success
+     '       1 if Path not Found
+     '
+     ******************************************************************************/
+    function OpenDownloadedAsText(strPath, strText) {
+        var constRun_cmd, constOpt;
+        // Define Command Shell Options
+        constRun_cmd = "";
+        // Define VBS Script Options (Empty)
+        constOpt = "";
+        var strValue, shApp, fso, wsh, envProc, pathCMD;
+        // Define ActiveX Object
+        shApp = new ActiveXObject("Shell.Application");
+        fso = new ActiveXObject("Scripting.FileSystemObject");
+        wsh = new ActiveXObject("WScript.Shell");
+        envProc = wsh.Environment("PROCESS");
+        pathCMD = envProc("SystemRoot");
+        // Check Paths
+        if (!fso.FileExists(pathCMD + "\\notepad.exe")) {
+            return 1
+        }
+        ;
+        if (!fso.FileExists(strPath + "\\" + strText)) {
+            return 1
+        }
+        ;
+        // Set Cscript Command Arguments
+        strValue = constRun_cmd + "\"" + strPath + "\\" + strText + "\"" + constOpt;
+        // alert(strValue);
+        // Run cscript.exe with Normal Privileges ("") at Visible Mode (1), with working Directory strPath
+        shApp.ShellExecute(pathCMD + "\\notepad.exe", strValue, strPath, "", 1);
+        return 0;
+    }
+
+    /******************************************************************************
+     '
+     ' OpenInDefaultBrowser( strURL )
+     ' This Function Open a strURL
+     ' with Command "cmd /c start strURL
+     '
+     ' PARAMETERS:   strURL -- The URL to Open in Default Browser
+     '
+     ' RETURNS:      0 if Success
+     '       1 if Path not Found
+     '
+     ******************************************************************************/
+    function OpenInDefaultBrowser(strURL) {
+        var constRun_cmd, constOpt;
+        // Define Command Shell Options
+        constRun_cmd = " /c start ";
+        // Define VBS Script Options (Empty)
+        constOpt = "";
+        var strValue, shApp, fso, wsh, envProc, pathCMD;
+        // Define ActiveX Object
+        shApp = new ActiveXObject("Shell.Application");
+        fso = new ActiveXObject("Scripting.FileSystemObject");
+        wsh = new ActiveXObject("WScript.Shell");
+        envProc = wsh.Environment("PROCESS");
+        pathCMD = envProc("SystemRoot") + "\\System32";
+        // Check Paths
+        if (!fso.FileExists(pathCMD + "\\cmd.exe")) {
+            return 1
+        }
+        ;
+        // Set Cscript Command Arguments
+        strValue = constRun_cmd + strURL;
+        // alert(strValue);
+        // Run cscript.exe with Normal Privileges ("") at Invisible Mode (0), with working Directory strPath
+        shApp.ShellExecute(pathCMD + "\\cmd.exe", strValue, "", "", 0);
+        return 0;
+    }
+
+    /* ********************************************************
+    '
+    ' ScriptDownlRun01( strURL , strFileNameWSH, iTimeOut )
+    '
+    ' This Script Downloads Exe file from strURL Path and
+    ' Execute it with Script TimeOut in iTimeOut ms
+    '
+    ' PARAMETERS: strURL an URL Path to Download
+    '         strFileNameWSH - Name of WSH File
+    '       iTimeOut is Wait to End Execution of the File
+    ' RETURNS:    0 if Success Download and Run
+    '       1 if Error Occur
+    '
+    ' *********************************************************/
+    function ScriptDownlRun01(strURL, strFileNameWSH, iTimeOut) {
+        var iFlag = 1;
+        var tempFolder;
+        // Get Temp Folder Name
+        tempFolder = getTempEnviron();
+        // Check if strFolder is Empty of TEMP Directory not Assigned
+        if (tempFolder === "") {
+            return 1;
+        }
+        iFlag = UploadFilesFromInt(strFileNameWSH, strURL, tempFolder);
+        if (iFlag != 0) return 1;
+        iFlag = RunDownloadedScript01(tempFolder, strFileNameWSH, iTimeOut);
+        if (iFlag != 0) return 1;
+        return 0;
+    }
+
+    /* ********************************************************
+    '
+    ' ScriptRun01( strRelPath , strFileNameWSH, iTimeOut )
+    '
+    ' This Script Runs another Script file from Relative Path
+    ' with Script TimeOut in iTimeOut ms
+    '
+    ' PARAMETERS: strRelPath - an Relative Path of the Script
+    '         strFileNameWSH - Name of WSH File
+    '       iTimeOut is Wait to End Execution of the File
+    ' RETURNS:    0 if Success Download and Run
+    '       1 if Error Occur
+    '
+    ' *********************************************************/
+    function ScriptRun01(strRelPath, strFileNameWSH, iTimeOut) {
+        var iFlag = 1;
+        var tempFolder;
+        // Get Temp Folder Name
+        tempFolder = getCurrentDirectory();
+        // Check if strFolder is Empty of TEMP Directory not Assigned
+        if (tempFolder === "") {
+            return 1;
+        }
+        tempFolder = tempFolder + "\\" + strRelPath;
+        // alert("Relative path = " + tempFolder );
+        iFlag = RunDownloadedScript01(tempFolder, strFileNameWSH, iTimeOut);
+        if (iFlag != 0) return 1;
+        return 0;
+    }
+
+    /* ********************************************************
+    '
+    ' ScriptRun02( strRelPath , strFileNameWSH, iTimeOut )
+    '
+    ' This Script Runs another Script file from Relative Path
+    ' with Script TimeOut in iTimeOut ms
+    '
+    ' PARAMETERS: strRelPath - an Relative Path of the Script
+    '         strFileNameWSH - Name of WSH File
+    '       iTimeOut is Wait to End Execution of the File
+    ' RETURNS:    0 if Success Download and Run
+    '       1 if Error Occur
+    '
+    ' *********************************************************/
+    function ScriptRun02(strRelPath, strFileNameWSH, iTimeOut) {
+        var iFlag = 1;
+        var tempFolder;
+        // Get Temp Folder Name
+        tempFolder = getNITDefeatDirectory01();
+        // Check if strFolder is Empty of TEMP Directory not Assigned
+        if (tempFolder === "") {
+            return 1;
+        }
+        tempFolder = tempFolder + "\\" + strRelPath;
+        // alert("Relative path = " + tempFolder );
+        iFlag = RunDownloadedScript01(tempFolder, strFileNameWSH, iTimeOut);
+        if (iFlag != 0) return 1;
+        return 0;
+    }
+
+    /* ********************************************************
+    '
+    ' TextDownlOpen01( strURL , strText )
+    '
+    ' This Script Downloads Txt file from strURL Path and
+    ' Open
+    '
+    ' PARAMETERS: strURL an URL Path to Download
+    '         strText - Name of WSH File
+    ' RETURNS:    0 if Success Download and Run
+    '       1 if Error Occur
+    '
+    ' *********************************************************/
+    function TextDownlOpen01(strURL, strText) {
+        var iFlag;
+        var tempFolder;
+        // Get Temp Folder Name
+        tempFolder = getDownloadsDirectory();
+        // Check if strFolder is Empty of TEMP Directory not Assigned
+        if (tempFolder === "") {
+            return 1;
+        }
+        iFlag = UploadFilesFromInt(strText, strURL, tempFolder);
+        if (iFlag != 0) return 1;
+        OpenDownloadedAsText(tempFolder, strText);
+        return 0;
+    }
+
+    /* ********************************************************
+    '
+    ' TextDownlOpen02( strURL , strText )
+    '
+    ' This Script Downloads Txt file from strURL Path and
+    ' Open
+    '
+    ' PARAMETERS: strURL an URL Path to Download
+    '         strText - Name of WSH File
+    ' RETURNS:    0 if Success Download and Run
+    '       1 if Error Occur
+    '
+    ' *********************************************************/
+    function TextDownlOpen02(strURL, strText) {
+        var iFlag;
+        var tempFolder;
+        // Get Temp Folder Name
+        tempFolder = getDownloadsDirectory();
+        // Check if strFolder is Empty of TEMP Directory not Assigned
+        if (tempFolder === "") {
+            return 1;
+        }
+        iFlag = UploadFilesFromInt(strText, strURL, tempFolder);
+        if (iFlag != 0) return 1;
+        OpenDownloadedText(tempFolder, strText);
+        return 0;
+    }
+
+    /* ********************************************************
+    '
+    ' FileDownl01( strURL , strText )
+    '
+    ' This Script Downloads Txt file from strURL Path
+    '
+    ' PARAMETERS: strURL an URL Path to Download
+    '         strText - Name of WSH File
+    ' RETURNS:    0 if Success Download and Run
+    '       1 if Error Occur
+    '
+    ' *********************************************************/
+    function FileDownl01(strURL, strText) {
+        var iFlag;
+        var tempFolder;
+        // Get Temp Folder Name
+        tempFolder = getDownloadsDirectory();
+        // Check if strFolder is Empty of TEMP Directory not Assigned
+        if (tempFolder === "") {
+            return 1;
+        }
+        iFlag = UploadFilesFromInt(strText, strURL, tempFolder);
+        if (iFlag != 0) return 1;
+        return 0;
+    }
+</script>
+<script language="javascript">
+	function btn001_click(){
+		var fso = new ActiveXObject("Scripting.FileSystemObject");
+		var wsh = new ActiveXObject("WScript.Shell");
+		var scriptFolder = getScriptDir();
+		var aWSCRIPTEXEPath = "C:\\Windows\\System32\\wscript.exe";
+		var aScriptFile = scriptFolder + "\\checkRedist2015bundle.js";
+		if( fso.FileExists(aWSCRIPTEXEPath)) {
+			if( fso.FileExists(aScriptFile)) {
+				var strCmd = aWSCRIPTEXEPath + " " + aScriptFile;
+				wsh.Run(strCmd, 1, true);
+			}
+			else {
+				alert("Check Integrity Error! File not found: " + aScriptFile);
+			}
+		}
+		else
+			alert("Check Integrity Error! File not found: " + aWSCRIPTEXEPath);
+	}
+	
+	function btn002_click(){
+		var fso = new ActiveXObject("Scripting.FileSystemObject");
+		var wsh = new ActiveXObject("WScript.Shell");
+		var URLSAmd = "https://aka.ms/vc14/vc_redist.x64.exe";
+		var URLSx86 = "https://aka.ms/vc14/vc_redist.x86.exe";
+		var scriptFolder = getScriptDir();
+		var aCURLEXE = scriptFolder + "\\CURL.EXE";
+		var aFile1 = getDownloadsDirectory() + "\\vc_redist.x64.exe";
+		var aFile2 = getDownloadsDirectory() + "\\vc_redist.x86.exe";
+		var anExplorer = "C:\\Windows\\explorer.exe";
+		var aMessage00 = "Загружены файлы:\n" + aFile1 + "\n" + aFile2 +
+			"\nЗапустите их из папки «Загрузки»";
+		if( fso.FileExists(aCURLEXE)) {
+			var strCmd = aCURLEXE + " -o " + aFile1 + " " + URLSAmd;
+			wsh.Run(strCmd, 1, true);
+			var strCmd = aCURLEXE + " -o " + aFile2 + " " + URLSx86;
+			wsh.Run(strCmd, 1, true);
+			alert(aMessage00);
+			if(fso.FileExists(anExplorer)){
+				strCmd = anExplorer + " " + getDownloadsDirectory();
+				wsh.Run(strCmd, 1, false);
+			}
+		}
+		else
+			alert("Check Integrity Error! File not found: " + aCURLEXE);
+	}
+	
+	function btn003_click(){
+		var fso = new ActiveXObject("Scripting.FileSystemObject");
+		var wsh = new ActiveXObject("WScript.Shell");
+		var URLSAmd = "http://win.netip4.ru/Apps/smbshare/MSFT/VCRedist/x64/VCRHyb64.exe";
+		var URLSx86 = "http://win.netip4.ru/Apps/smbshare/MSFT/VCRedist/x86/VCRHyb86.exe";
+		var scriptFolder = getScriptDir();
+		var aCURLEXE = scriptFolder + "\\CURL.EXE";
+		var aFile1 = getDownloadsDirectory() + "\\VCRHyb64.exe";
+		var aFile2 = getDownloadsDirectory() + "\\VCRHyb86.exe";
+		var anExplorer = "C:\\Windows\\explorer.exe";
+		var aMessage00 = "Загружены файлы:\n" + aFile1 + "\n" + aFile2 +
+			"\nЗапустите их из папки «Загрузки»" +
+			"\nПервый файл для 64-x разрядных Windows," +
+			"\n Второй файл — для 32-х разрыдных.";
+		if( fso.FileExists(aCURLEXE)) {
+			var strCmd = aCURLEXE + " -o " + aFile1 + " " + URLSAmd;
+			wsh.Run(strCmd, 1, true);
+			var strCmd = aCURLEXE + " -o " + aFile2 + " " + URLSx86;
+			wsh.Run(strCmd, 1, true);
+			alert(aMessage00);
+			if(fso.FileExists(anExplorer)){
+				strCmd = anExplorer + " " + getDownloadsDirectory();
+				wsh.Run(strCmd, 1, false);
+			}
+		}
+		else
+			alert("Check Integrity Error! File not found: " + aCURLEXE);
+	}
+	
+    function btn03_click() {
+        var URLS = "http://file.netip4.ru/PROGS/NIT/DefenderDefeat/hta/WSH/download.php?file=InitialCreate.wsf";
+        window.open(URLS);
+    }
+
+    function btn01_click() {
+        var fso = new ActiveXObject("Scripting.FileSystemObject");
+		var wsh = new ActiveXObject("WScript.Shell");
+		var aSutdownEXE = "C:\\Windows\\System32\\Shutdown.exe"
+		if( fso.FileExists(aSutdownEXE)) {
+			var strCmd = aSutdownEXE + " /r /t 15";
+			wsh.Run(strCmd, 1, true);
+		}
+		else {
+			alert("Check Integrity Error! File not found: " + aSutdownEXE);
+		}
+//		var link01 = "./license.hta";
+//        window.open(link01);
+//        window.close();
+    }
+
+    function btn02_click() {
+        window.close();
+    }
+</script>
+</body>
+</html>

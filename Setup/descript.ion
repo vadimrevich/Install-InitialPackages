@@ -1,0 +1,4 @@
+download.html -- web page to download package with description\n\nÂ
+descript.ion -- directory description (this file)\nThis directory mustbe placed at https://secure.netip6.ru/nit000/files/Setup/\n\nÂ
+download.php -- File for Package Downloading from sites\nÂ
+InstallInitialPackagesSetup.exe -- Installation Package for a Windows Adjusting after its Installation\nÂ
